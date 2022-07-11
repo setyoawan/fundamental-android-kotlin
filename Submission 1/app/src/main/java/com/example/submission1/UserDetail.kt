@@ -18,6 +18,8 @@ class UserDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_detail)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -26,7 +28,7 @@ class UserDetail : AppCompatActivity() {
         }
 
         val dataUser = intent.getParcelableExtra<User>(EXTRA_USER) as User
-        var imgAvatar = findViewById<ImageView>(R.id.iv_item_avatar_detail)
+        val imgAvatar = findViewById<ImageView>(R.id.iv_item_avatar_detail)
         Glide.with(this)
             .load(dataUser.avatar)
             .circleCrop()
@@ -36,5 +38,10 @@ class UserDetail : AppCompatActivity() {
                 "Followers: ${dataUser.followers}\n" +
                 "Following: ${dataUser.following}"
         findViewById<TextView>(R.id.tv_item_object_detail).text = objectDetail
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
