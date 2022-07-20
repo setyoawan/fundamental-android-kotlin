@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.restaurantreview.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +40,6 @@ class MainActivity : AppCompatActivity() {
             setRestaurantData(restaurant)
         })
 
-
         val layoutManager = LinearLayoutManager(this)
         binding.rvReview.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
@@ -50,8 +50,12 @@ class MainActivity : AppCompatActivity() {
             setReviewData(consumerReviews)
         })
 
-        mainViewModel.isLoading.observe(this, {
-            showLoading(it)
+        mainViewModel.snackbarText.observe(this, {
+            Snackbar.make(
+                window.decorView.rootView,
+                it,
+                Snackbar.LENGTH_SHORT
+            ).show()
         })
 
         // findRestaurant()
