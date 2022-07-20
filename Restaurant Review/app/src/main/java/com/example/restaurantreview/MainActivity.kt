@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -32,21 +33,38 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        // add view model
+        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        mainViewModel.restaurant.observe(this, { restaurant ->
+            setRestaurantData(restaurant)
+        })
+
+
         val layoutManager = LinearLayoutManager(this)
         binding.rvReview.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvReview.addItemDecoration(itemDecoration)
 
-        findRestaurant()
+        // add view model
+        mainViewModel.listReview.observe(this, { consumerReviews ->
+            setReviewData(consumerReviews)
+        })
+
+        mainViewModel.isLoading.observe(this, {
+            showLoading(it)
+        })
+
+        // findRestaurant()
 
         binding.btnSend.setOnClickListener { view ->
-            postReview(binding.edReview.text.toString())
+            mainViewModel.postReview(binding.edReview.text.toString())
+            //  postReview(binding.edReview.text.toString())
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 
-    private fun findRestaurant() {
+    /*private fun findRestaurant() {
         showLoading(true)
         val client = ApiConfig.getApiService().getRestaurant(RESTAURANT_ID)
         client.enqueue(object : Callback<RestaurantResponse> {
@@ -126,5 +144,26 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.progressBar.visibility = View.GONE
         }
+    }*/
+
+    private fun setRestaurantData(restaurant: Restaurant) {
+        binding.tvTitle.text = restaurant.name
+        binding.tvDescription.text = restaurant.description
+        Glide.with(this)
+            .load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
+            .into(binding.ivPicture)
+    }
+
+    private fun setReviewData(consumerReviews: List<CustomerReviewsItem>) {
+        val listReview = consumerReviews.map {
+            "${it.review}\n- ${it.name}"
+        }
+        val adapter = ReviewAdapter(listReview)
+        binding.rvReview.adapter = adapter
+        binding.edReview.setText("")
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
