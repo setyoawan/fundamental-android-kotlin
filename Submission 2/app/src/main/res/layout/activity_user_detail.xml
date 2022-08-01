@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserDetailActivity">
+
+    <ImageView
+        android:id="@+id/iv_avatar_detail"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name_detail"
+        style="@style/TextContent.MainText"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/detail_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_avatar_detail"
+        app:layout_constraintStart_toStartOf="@+id/iv_avatar_detail"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar_detail" />
+
+    <TextView
+        android:id="@+id/tv_company_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/detail_company"
+        android:drawableStart="@drawable/ic_outline_office_24"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="@+id/tv_name_detail"
+        app:layout_constraintStart_toStartOf="@+id/tv_name_detail"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_detail"/>
+
+    <TextView
+        android:id="@+id/tv_location_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/detail_location"
+        android:drawableStart="@drawable/ic_outline_location_on_24"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="@+id/tv_company_detail"
+        app:layout_constraintStart_toStartOf="@+id/tv_company_detail"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company_detail" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_location_detail"
+        app:layout_constraintStart_toStartOf="@+id/tv_location_detail"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location_detail">
+
+        <TextView
+            android:id="@+id/tv_followers_detail"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:gravity="center_vertical"
+            android:text="5 followers" />
+
+        <TextView
+            android:id="@+id/tv_following_detail"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:gravity="center_vertical"
+            android:text="5 following" />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="tab"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:tabTextColor="@android:color/black" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
