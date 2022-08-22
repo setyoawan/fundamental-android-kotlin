@@ -1,0 +1,19 @@
+<resources>
+    <string name="header_text">Github</string>
+    <string name="splash_tag">Welcome</string>
+    <string name="welcome">Hello</string>
+    <string name="user">Awan Prakoso</string>
+    <string name="result_user">Users</string>
+    <string name="news_text">News</string>
+    <string name="name">User Name</string>
+    <string name="type">User Type</string>
+    <string name="detail_company">Company</string>
+    <string name="detail_location">Location</string>
+    <string name="detail_name">Name Detail</string>
+    <string name="tab1">Followers</string>
+    <string name="tab2">Following</string>
+    <string name="search_text">search user</string>
+    <string name="item_favorite">Favorite</string>
+    <string name="item_setting">Settings</string>
+    <string name="switch_text">Switch</string>
+</resources>
